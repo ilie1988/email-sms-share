@@ -250,12 +250,6 @@ function InviteScreen() {
 }
 
 export default class App extends React.Component {
-  render() {
-    return <InviteScreen />;
-  }
-}
-
-export default class App extends React.Component {
  
   renderResults=() =>{ 
     return <InviteScreen />;
