@@ -76,7 +76,7 @@ const ContactRow = React.memo(
       <TouchableHighlight onPress={onPress}>
         <View
           style={{ padding: 16, flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ marginRight: 16 }}>{selected ? 'X' : 'O'}</Text>
+          <Text style={{ marginRight: 16 }}>{selected ? '✅' : '⭕️'}</Text>
           <View style={{ flex: 1 }}>
             <Text>{name || emailOrNumber}</Text>
             {name.length > 0 && (
@@ -250,20 +250,30 @@ function InviteScreen() {
 }
 
 export default class App extends React.Component {
- 
-  renderResults=() =>{ 
-    return <InviteScreen />;
-  } 
+  constructor(props) {
+      super(props);
+      this.state = {clicked: false};
+  }
 
-  render() { 
-    return (
-      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Button onPress={ this.renderResults} 
-          title="Get Contacts!" 
-          color="#841584" /> 
-    </View> 
-    );
-   }
+  onTap = () => {
+    this.setState({
+      clicked: true
+    });
+  }
+
+  render(){
+     return(
+          <View style={{flex: 1}}>
+          {this.state.clicked?
+            <InviteScreen />
+              :
+            <View style={{flex: 2, justifyContent:'center',alignItems:'center'}}>  
+           <Button onPress={() =>this.onTap()} title="Get Contacts!" 
+          color="#841584" /></View>
+            }
+          </View>
+     );
+  }
 }
 
 const styles = StyleSheet.create({
